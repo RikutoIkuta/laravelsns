@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticleTagTable extends Migration
+class CreateFollowTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateArticleTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('article_id');
-            $table->foreign('article_id')
+            $table->bigInteger('follower_id');
+            $table->foreign('follower_id')
                 ->references('id')
-                ->on('articles')
+                ->on('user')
                 ->onDelete('cascade');
-            $table->bigInteger('tag_id');
-            $table->foreign('tag_id')
-                ->references('id')
-                ->on('tags')
-                ->onDelete('cascade');
+            $table->bigInteger('followee_id');
+            $table->foreign('followee_id')
+                 ->references('id')
+                 ->on('users')
+                 ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateArticleTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_tag');
+        Schema::dropIfExists('follows');
     }
 }
