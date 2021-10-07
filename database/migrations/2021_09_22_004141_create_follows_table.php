@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFollowTable extends Migration
+class CreateFollowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,13 +18,13 @@ class CreateFollowTable extends Migration
             $table->bigInteger('follower_id');
             $table->foreign('follower_id')
                 ->references('id')
-                ->on('user')
+                ->on('users')
                 ->onDelete('cascade');
             $table->bigInteger('followee_id');
             $table->foreign('followee_id')
-                 ->references('id')
-                 ->on('users')
-                 ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
